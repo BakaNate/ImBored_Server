@@ -4,6 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
+    "start": "node -r esm src/core/index.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
@@ -15,5 +16,25 @@
   "bugs": {
     "url": "https://gitlab.com/fs2-imbored/server/issues"
   },
-  "homepage": "https://gitlab.com/fs2-imbored/server#readme"
+  "homepage": "https://gitlab.com/fs2-imbored/server#readme",
+  "devDependencies": {
+    "@babel/cli": "^7.6.0",
+    "@babel/core": "^7.6.0",
+    "@babel/preset-env": "^7.6.0",
+    "babel-core": "^6.26.3",
+    "eslint": "^6.4.0",
+    "eslint-plugin-react": "^7.14.3"
+  },
+  "dependencies": {
+    "body-parser": "^1.19.0",
+    "cors": "^2.8.5",
+    "ddos": "^0.2.1",
+    "eslint-config-airbnb-base": "^14.0.0",
+    "eslint-plugin-import": "^2.18.2",
+    "express": "^4.17.1",
+    "helmet": "^3.21.1",
+    "mongoose": "^5.7.4",
+    "nodemon": "^1.19.2",
+    "passport": "^0.4.0"
+  }
 }
