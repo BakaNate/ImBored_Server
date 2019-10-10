@@ -13,6 +13,11 @@ const logger = require('../tools/logger');
 const port = (process.env.BUILD_ENVIRONMENT === 'PRODUCTION') ? 3000 : 3080;
 const mongooseUri = (process.env.BUILD_ENVIRONMENT === 'PRODUCTION') ? 'mongodb://localhost:27017/imBored' : 'mongodb://localhost:27017/imBored-dev';
 
+const UserModel = require('../models/UserModel');
+
+const userController = require('../controllers/userController');
+const authController = require('../controllers/Auth');
+
 console.time('[*] Booting');
 
 const app = express();
@@ -24,6 +29,15 @@ function configRouter() {
 
   router.route('/')
     .get(logger.myLogger, (req, res) => { res.status(200).send('Salam !'); });
+
+  router.route('/register')
+    .post(logger.myLogger, userController.registerUser);
+
+  router.route('/login')
+    .post(logger.myLogger, userController.logUser);
+
+  router.route('/admin')
+    .get(logger.myLogger, authController.isAuthenticated);
 
   app.use(router);
 }
