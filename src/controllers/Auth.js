@@ -2,7 +2,7 @@ import passport from 'passport';
 import PassportCustom from 'passport-custom';
 import jwt from 'jsonwebtoken';
 
-const secret = 'kidjuekidlontedh';
+const secret = 'thisIs4SecretKey@';
 
 passport.use('jwt', new PassportCustom(
   async (req, cb) => {

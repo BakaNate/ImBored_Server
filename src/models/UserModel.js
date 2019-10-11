@@ -4,7 +4,7 @@ import INTERNAL_SERVOR_ERROR from '../tools/messages/errorMessages';
 const mongoose = require('mongoose');
 const bcrypt = require('bcrypt');
 
-const secret = 'thisIsASecretKey';
+const secret = 'thisIs4SecretKey@';
 
 const UserSchema = new mongoose.Schema({
   docVersion: {
