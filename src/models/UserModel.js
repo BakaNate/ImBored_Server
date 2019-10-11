@@ -26,6 +26,10 @@ const UserSchema = new mongoose.Schema({
     maxLength: 254,
     select: false,
   },
+  userRooms: {
+    type: [String],
+    maxLength: 254,
+  },
 });
 
 UserSchema.statics.createUser = async function (userEmail, userPswd, cb) {

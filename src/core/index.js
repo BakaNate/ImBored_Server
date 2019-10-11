@@ -5,6 +5,8 @@ const passport = require('passport');
 const helmet = require('helmet');
 const Ddos = require('ddos');
 const cors = require('cors');
+const socketio = require('socket.io');
+const http = require('http');
 
 // Tools
 const { Xlog } = require('../tools/Xlog');
@@ -13,7 +15,6 @@ const logger = require('../tools/logger');
 const port = (process.env.BUILD_ENVIRONMENT === 'PRODUCTION') ? 3000 : 3080;
 const mongooseUri = (process.env.BUILD_ENVIRONMENT === 'PRODUCTION') ? 'mongodb://localhost:27017/imBored' : 'mongodb://localhost:27017/imBored-dev';
 
-const UserModel = require('../models/UserModel');
 
 const userController = require('../controllers/userController');
 const authController = require('../controllers/Auth');
@@ -21,6 +22,7 @@ const authController = require('../controllers/Auth');
 console.time('[*] Booting');
 
 const app = express();
+const server = http.createServer(app);
 
 function configRouter() {
   const router = express.Router();
@@ -87,7 +89,7 @@ function initMongoConnect() {
 initMongoConnect();
 configApp(app);
 
-const server = app.listen(port, () => {
+server.listen(port, () => {
   Xlog('ImBored server', 'INF');
   Xlog('Written by BakaNate', 'INF');
   Xlog('For Epitech', 'INF');
