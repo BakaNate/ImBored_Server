@@ -23,6 +23,7 @@ console.time('[*] Booting');
 
 const app = express();
 const server = http.createServer(app);
+const io = socketio(server);
 
 function configRouter() {
   const router = express.Router();
@@ -43,6 +44,15 @@ function configRouter() {
 
   app.use(router);
 }
+
+io.on('connection', (socket) => {
+  // eslint-disable-next-line no-console
+  console.log('user online');
+
+  socket.on('disconnect', () => {
+    console.log('user left');
+  });
+});
 
 function configApp(theapp) {
   theapp.use(cors((req, next) => {
