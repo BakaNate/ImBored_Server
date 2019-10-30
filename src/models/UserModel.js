@@ -59,4 +59,18 @@ UserSchema.statics.fetchUser = async function (userEmail, userPswd, cb) {
   }).select('+userPswd');
 };
 
+UserSchema.statics.addRoom = async function (userEmail, room, cb) {
+  if (!userEmail || !room) return;
+  await this.findOne({ userEmail }, async (err, user) => {
+    if (err) return cb(err);
+    if (!user) return cb(new Error('User not found'));
+    const newRoom = await user.userRooms.indexOf(room);
+    if (newRoom === -1) {
+      user.userRooms.push(room);
+      user.save();
+    }
+    return cb(null, user);
+  });
+};
+
 module.exports = mongoose.model('User', UserSchema);

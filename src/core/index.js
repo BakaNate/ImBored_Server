@@ -15,7 +15,7 @@ const logger = require('../tools/logger');
 const port = (process.env.BUILD_ENVIRONMENT === 'PRODUCTION') ? 3000 : 3080;
 const mongooseUri = (process.env.BUILD_ENVIRONMENT === 'PRODUCTION') ? 'mongodb://localhost:27017/imBored' : 'mongodb://localhost:27017/imBored-dev';
 
-
+const User = require('../models/UserModel');
 const userController = require('../controllers/userController');
 const authController = require('../controllers/Auth');
 
@@ -46,11 +46,26 @@ function configRouter() {
 }
 
 io.on('connection', (socket) => {
-  // eslint-disable-next-line no-console
-  console.log('user online');
+  Xlog('User connected', '[INF]');
+  socket.on('join', async ({ user, room }, cb) => {
+    Xlog(`User: ${user} connected to room: ${room}`, '[INF]');
+    await User.addRoom(user, room, (err, cbUser) => {
+      if (err) {
+        Xlog(`ERROR IN ADDROOM:\n${err}`, '[ERR]');
+        return cb(err);
+      }
+      return (cbUser);
+    });
+
+    socket.emit('message', { user: 'admin', text: `Welcome ${user} to our room: ${room}` });
+    socket.broadcast.to(room).emit('message', { user: 'admin', text: `${user}, has joined!` });
+
+    socket.join(room);
+    cb();
+  });
 
   socket.on('disconnect', () => {
-    console.log('user left');
+    Xlog('User Disconnected', '[INF]');
   });
 });
 
