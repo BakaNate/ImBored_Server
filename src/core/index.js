@@ -64,6 +64,11 @@ io.on('connection', (socket) => {
     cb();
   });
 
+  socket.on('sendStatus', (userEmail, room, cb) => {
+    io.to(room).emit('status', { user: userEmail, text: `${userEmail} S'ennuie fortement` });
+    cb();
+  });
+
   socket.on('disconnect', () => {
     Xlog('User Disconnected', '[INF]');
   });
