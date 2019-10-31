@@ -7,12 +7,6 @@ const bcrypt = require('bcrypt');
 const secret = 'thisIs4SecretKey@';
 
 const UserSchema = new mongoose.Schema({
-  docVersion: {
-    type: Number,
-    required: true,
-    default: 1,
-    select: false,
-  },
   userEmail: {
     type: String,
     required: true,
