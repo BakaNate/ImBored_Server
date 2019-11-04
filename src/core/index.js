@@ -65,7 +65,7 @@ io.on('connection', (socket) => {
   });
 
   socket.on('sendMessage', (message, userEmail, room, cb) => {
-    io.to(room).emit('message', { user: userEmail, text: `${userEmail} S'ennuie fortement` });
+    io.to(room).emit('message', { user: userEmail, text: `${userEmail}: ${message}` });
     cb();
   });
 
