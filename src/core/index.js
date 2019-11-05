@@ -11,9 +11,12 @@ const http = require('http');
 // Tools
 const { Xlog } = require('../tools/Xlog');
 const logger = require('../tools/logger');
+const Constants = require('../tools/Constants');
 
-const port = (process.env.BUILD_ENVIRONMENT === 'PRODUCTION') ? 3000 : 3080;
-const mongooseUri = (process.env.BUILD_ENVIRONMENT === 'PRODUCTION') ? 'mongodb://localhost:27017/imBored' : 'mongodb://localhost:27017/imBored-dev';
+const constant = new Constants();
+
+const port = (process.env.BUILD_ENVIRONMENT === 'PRODUCTION') ? constant.PORT : constant.PORT_DEV;
+const mongooseUri = (process.env.BUILD_ENVIRONMENT === 'PRODUCTION') ? constant.DB_URI : constant.DB_URI_DEV;
 
 const User = require('../models/UserModel');
 const userController = require('../controllers/userController');
