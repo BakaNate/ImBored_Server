@@ -3,8 +3,11 @@ import INTERNAL_SERVOR_ERROR from '../tools/messages/errorMessages';
 
 const mongoose = require('mongoose');
 const bcrypt = require('bcrypt');
+const Constants = require('../tools/Constants');
 
-const secret = 'thisIs4SecretKey@';
+const constant = new Constants();
+
+const secret = constant.SECRET;
 
 const UserSchema = new mongoose.Schema({
   userEmail: {
