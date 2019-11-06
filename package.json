@@ -7,7 +7,7 @@
     "start": "nodemon -r esm src/core/index.js",
     "test": "echo \"Error: no test specified\" && exit 1",
     "lint": "eslint .",
-    "startProd": "node -r esm src/core/index.js"
+    "prod": "node -r esm src/core/index.js"
   },
   "repository": {
     "type": "git",
@@ -41,6 +41,7 @@
     "jsonwebtoken": "^8.5.1",
     "migrate-mongoose": "^4.0.0",
     "mongoose": "^5.7.4",
+    "nodemailer": "^6.3.1",
     "nodemon": "^1.19.2",
     "passport": "^0.4.0",
     "passport-custom": "^1.1.0",
