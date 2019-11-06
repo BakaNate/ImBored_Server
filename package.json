@@ -7,7 +7,7 @@
     "start": "nodemon -r esm src/core/index.js",
     "test": "echo \"Error: no test specified\" && exit 1",
     "lint": "eslint .",
-    "startProd": "node -r esm src/core/index.js"
+    "prod": "node -r esm src/core/index.js"
   },
   "repository": {
     "type": "git",
